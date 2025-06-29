@@ -104,7 +104,7 @@ function Signup() {
         </form>
         <p className="text-center text-sm mt-4">
           Already have an account?{" "}
-          <a href="/login" className="link text-primary">
+          <a href="/signin" className="link text-primary">
             Login
           </a>
         </p>

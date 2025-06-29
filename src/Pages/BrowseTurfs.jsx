@@ -72,7 +72,7 @@ const BrowseTurfs = () => {
                 </Link>
 
                 <Link
-                  to={`/book/${turf._id}`}
+                  to={`/user/book/${turf._id}`}
                   className="btn btn-sm btn-primary"
                 >
                   Book Now

@@ -13,7 +13,10 @@ const Header = () => {
 
   return (
     <header className="bg-primary text-black p-4 flex justify-between">
-      <Link to="/" className="font-bold text-xl">Turf Booking</Link>
+      <Link to="/" className="font-bold text-xl">
+        Turf Booking
+      </Link>
+
       <nav className="space-x-4">
         <Link to="/turfs">Browse Turfs</Link>
 
@@ -22,13 +25,19 @@ const Header = () => {
             <Link to="/signin">Login</Link>
             <Link to="/signup">Signup</Link>
           </>
-        ) : (
+        ) : user?.role === "user" ? (
           <>
             <Link to="/user/dashboard">Dashboard</Link>
-            <Link to="/my-bookings">My Bookings</Link>
+            <Link to="/user/bookings">My Bookings</Link>
             <button onClick={handleLogout}>Logout</button>
           </>
-        )}
+        ) : user?.role === "manager" || user?.role === "admin" ? (
+          <>
+            <Link to="/manager/dashboard">Dashboard</Link>
+            <Link to="/manager/createturf">Create Turf</Link>
+            <button onClick={handleLogout}>Logout</button>
+          </>
+        ) : null}
       </nav>
     </header>
   );

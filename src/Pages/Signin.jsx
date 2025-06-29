@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { api } from "../api/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loginSuccess } from '../redux/features/users/userSlice';
+import { loginSuccess } from "../redux/features/users/userSlice";
 
 function Signin() {
   const dispatch = useDispatch();
@@ -13,38 +13,39 @@ function Signin() {
   const [error, setError] = useState("");
 
   const handleSignin = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!email || !password) {
-    setError("Please enter email and password");
-    return;
-  }
+    if (!email || !password) {
+      setError("Please enter email and password");
+      return;
+    }
 
-  try {
-    const res = await api.post("/auth/signin", { email, password });
-    console.log("Response from server:", res)
+    try {
+      const res = await api.post("/auth/signin", { email, password });
+      console.log("Response from server:", res);
 
-    const { token, user, msg } = res.data;
-    
+      const { token, user, msg } = res.data;
 
-    // Save to Redux store and localStorage
-    dispatch(loginSuccess({ token, user }));
-    localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(user));
+      // Save to Redux store and localStorage
+      dispatch(loginSuccess({ token, user }));
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
 
-    alert(msg);
+      alert(msg);
 
-    // Redirect based on role
-    if (user.role === "admin") navigate("/admin-dashboard");
-    else if (user.role === "manager") navigate("/manager-dashboard");
-    else navigate("/user/dashboard");
-
-  } catch (error) {
-    console.log(error.response); 
-    const errMsg = error.response?.data?.msg || "Login failed. Please check credentials.";
-    setError(errMsg);
-  }
-};
+      // Redirect based on role
+      if (user.role === "manager" || user.role === "admin") {
+        navigate("/manager/dashboard");
+      } else {
+        navigate("/user/dashboard");
+      }
+    } catch (error) {
+      console.log(error.response);
+      const errMsg =
+        error.response?.data?.msg || "Login failed. Please check credentials.";
+      setError(errMsg);
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200 px-4">
@@ -79,7 +80,10 @@ function Signin() {
           <button className="btn btn-primary w-full">Login</button>
         </form>
         <p className="text-center text-sm mt-4">
-          Don't have an account? <a href="/Signup" className="link text-primary">Register</a>
+          Don't have an account?{" "}
+          <a href="/Signup" className="link text-primary">
+            Register
+          </a>
         </p>
       </div>
     </div>
