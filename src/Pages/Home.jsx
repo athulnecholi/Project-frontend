@@ -18,8 +18,8 @@ function HomePage() {
           "Football is not just a game, it's an emotion. Book your turf and let the game begin!"
         </p>
         <div className="flex gap-4 justify-center">
-          <a href="/Signin" className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg shadow transition transform hover:scale-105">Login</a>
-          <a href="/Signup" className="px-6 py-2 border border-green-600 text-green-600 hover:bg-green-50 rounded-lg transition transform hover:scale-105">Register</a>
+          <a href="/signin" className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg shadow transition transform hover:scale-105">Login</a>
+          <a href="/signup" className="px-6 py-2 border border-green-600 text-green-600 hover:bg-green-50 rounded-lg transition transform hover:scale-105">Register</a>
         </div>
       </motion.div>
 

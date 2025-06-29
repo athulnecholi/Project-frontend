@@ -7,7 +7,7 @@ import "./index.css";
 import BrowseTurfs from "./Pages/BrowseTurfs";
 import BookTurfs from "./Pages/BookTurfs";
 import MyBookings from "./users/myBookings";
-import UserDashboard from "./users/UserDashboard";
+import UserDashboard from "./managers/ManagerDashboard";
 import ManagerDashboard from "./managers/ManagerDashboard";
 import ViewTurf from "./Pages/ViewTurf";
 import MainLayout from "./layouts/MainLayout";
