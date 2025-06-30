@@ -28,6 +28,7 @@ function Signin() {
 
       // Save to Redux store and localStorage
       dispatch(loginSuccess({ token, user }));
+      console.log('final usr after login ',user)
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
