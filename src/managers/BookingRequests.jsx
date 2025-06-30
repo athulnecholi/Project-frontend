@@ -11,7 +11,9 @@ const BookingRequests = () => {
         const res = await axios.get("/api/bookings/manager", {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setBookings(res.data);
+
+        // FIXED: Access bookings array from res.data.bookings
+        setBookings(Array.isArray(res.data.bookings) ? res.data.bookings : []);
       } catch (err) {
         console.error("Failed to load bookings", err);
       }
@@ -30,6 +32,8 @@ const BookingRequests = () => {
           },
         }
       );
+
+      // Update status in local state
       setBookings((prev) =>
         prev.map((b) => (b._id === bookingId ? { ...b, status } : b))
       );
