@@ -65,7 +65,7 @@ const BookTurfs = () => {
 
       {turf.images?.[0] && (
         <img
-          src={`http://localhost:3000/uploads/turfs/${turf.images[0]}`}
+          src={`https://project-backend-1-jpy2.onrender.com/uploads/turfs/${turf.images[0]}`}
           alt="Turf"
           className="w-full h-56 object-cover rounded mb-4"
         />
