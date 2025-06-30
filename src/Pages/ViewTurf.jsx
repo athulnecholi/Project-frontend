@@ -51,7 +51,7 @@ const ViewTurf = () => {
       {/* Banner */}
       <div className="relative h-64 rounded-xl overflow-hidden shadow-lg">
         <img
-          src={`http://localhost:3000/uploads/turfs/${turf.images?.[0]}`}
+          src={`https://project-backend-1-jpy2.onrender.com/uploads/turfs/${turf.images?.[0]}`}
           alt="Main Turf"
           className="w-full h-full object-cover"
         />
@@ -79,7 +79,7 @@ const ViewTurf = () => {
           {turf.images?.map((img, idx) => (
             <img
               key={idx}
-              src={`http://localhost:3000/uploads/turfs/${img}`}
+              src={`https://project-backend-1-jpy2.onrender.com/uploads/turfs/${img}`}
               alt={`Turf ${idx}`}
               className="rounded-lg h-40 object-cover shadow"
             />
