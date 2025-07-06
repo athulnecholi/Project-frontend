@@ -8,6 +8,8 @@ import {
   resetTurfState,
 } from "../redux/features/turfs/turfSlice";
 import axios from "axios";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 
 const TIME_SLOTS = [
   "06:00 - 07:00",
@@ -68,7 +70,7 @@ const CreateTurfPage = () => {
       formData.availability.forEach((slot) => payload.append("availability", slot));
       formData.images.forEach((img) => payload.append("images", img));
 
-      const res = await axios.post("/api/turfs/create", payload, {
+      const res = await axios.post(`${API_BASE_URL}/api/turfs/create`, payload, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,

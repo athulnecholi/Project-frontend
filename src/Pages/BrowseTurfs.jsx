@@ -6,78 +6,29 @@ const BrowseTurfs = () => {
   const [turfs, setTurfs] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // 🔍 Search inputs
-  const [name, setName] = useState("");
-  const [location, setLocation] = useState("");
-  const [timeSlot, setTimeSlot] = useState("");
-
-  const fetchTurfs = async () => {
-    setLoading(true);
-    try {
-      const queryParams = new URLSearchParams();
-
-      if (name) queryParams.append("name", name);
-      if (location) queryParams.append("location", location);
-      if (timeSlot) queryParams.append("timeSlot", timeSlot);
-
-      const res = await api.get(`/search?${queryParams.toString()}`);
-      setTurfs(res.data);
-    } catch (err) {
-      console.error("Failed to fetch turfs:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchTurfs();
-  }, []); 
+    const fetchTurfs = async () => {
+      try {
+        const res = await api.get('/turfs'); // ✅ Old route
+        setTurfs(res.data);
+      } catch (err) {
+        console.error("Failed to fetch turfs:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    fetchTurfs(); // Fetch with search filters
-  };
+    fetchTurfs();
+  }, []);
 
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6 text-center">Browse Turfs</h1>
 
-      {/* 🔍 Search Form */}
-      <form
-        onSubmit={handleSearch}
-        className="flex flex-col sm:flex-row gap-4 mb-6 justify-center"
-      >
-        <input
-          type="text"
-          placeholder="Search by name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="input input-bordered w-full sm:w-1/3"
-        />
-        <input
-          type="text"
-          placeholder="Search by location"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          className="input input-bordered w-full sm:w-1/3"
-        />
-        <input
-          type="text"
-          placeholder="Search by time slot (e.g., 10:00-11:00)"
-          value={timeSlot}
-          onChange={(e) => setTimeSlot(e.target.value)}
-          className="input input-bordered w-full sm:w-1/3"
-        />
-        <button type="submit" className="btn btn-primary">
-          Search
-        </button>
-      </form>
-
-      {/* 🟢 Results */}
       {loading ? (
         <p className="text-center text-gray-500">Loading turfs...</p>
       ) : turfs.length === 0 ? (
-        <p className="text-center text-red-500">No turfs found.</p>
+        <p className="text-center text-red-500">No turfs available.</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {turfs.map((turf) => (
