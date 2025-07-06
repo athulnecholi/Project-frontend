@@ -1,5 +1,6 @@
 import React, { useState, useSyncExternalStore } from "react";
 import { api } from "../api/axiosInstance";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const [email,setEmail]=useState("")
@@ -7,6 +8,7 @@ function Signup() {
   const [name,setName]=useState("")
   const [role,setRole]=useState("")
   const [error,setError]=useState("")
+  const navigate=useNavigate()
   const handleSignup=async()=>{
     if(!email||!password||!name||!role){
       setError("Please enter all the fileds !")
@@ -19,6 +21,7 @@ function Signup() {
     )
       
       alert(`Signup Successfull : ${res.data.msg}`)
+      navigate('/signin')
     } 
     
     catch (error) {

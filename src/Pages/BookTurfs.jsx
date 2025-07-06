@@ -22,6 +22,14 @@ const BookTurfs = () => {
       return setError("Please select both date and time slot.");
     }
 
+    const selectedDate = new Date(date);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (selectedDate < today) {
+      return setError("Cannot book for a past date.");
+    }
+
     try {
       await api.post(
         "/bookings",
@@ -78,6 +86,7 @@ const BookTurfs = () => {
         <input
           type="date"
           value={date}
+          min={new Date().toISOString().split("T")[0]} // disables past dates
           onChange={(e) => setDate(e.target.value)}
           className="w-full border px-3 py-2 rounded text-black bg-white"
         />

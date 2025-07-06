@@ -39,7 +39,7 @@ const ViewTurf = () => {
       setComment("");
       fetchReviews();
     } catch (err) {
-      setSubmitError("Failed to submit review.");
+      setSubmitError("Failed to submit review.(Sigin is required)");
     }
   };
 
